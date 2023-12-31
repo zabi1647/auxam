@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "428575839957",
+    "project_id": "auxam-12d63",
+    "storage_bucket": "auxam-12d63.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:428575839957:android:8f701585902ffe30d1745c",
+        "android_client_info": {
+          "package_name": "com.example.auxam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGqpsNkeDInghMIBnsgqUvta2nNX5k61k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
