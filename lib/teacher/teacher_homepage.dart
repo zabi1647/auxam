@@ -1,12 +1,12 @@
 import 'package:auxam/utils/utlities.dart';
-import 'package:auxam/view/login_page.dart';
-import 'package:auxam/view/sign_up.dart';
+import 'package:auxam/auth/login_page.dart';
+import 'package:auxam/auth/sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class TeacherHomePage extends StatelessWidget {
+  const TeacherHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {

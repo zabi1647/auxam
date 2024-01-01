@@ -1,6 +1,8 @@
 import 'package:auxam/utils/utlities.dart';
+import 'package:auxam/auth/login_page.dart';
+import 'package:auxam/view/user_data.dart';
 import 'package:auxam/widgets/round_button.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -14,7 +16,7 @@ class _SignUpState extends State<SignUp> {
   final emailcontroller = TextEditingController();
   final passowordcontroller = TextEditingController();
   final _form = GlobalKey<FormState>();
-  final _store = FirebaseFirestore.instance.collection('Vendors');
+  final _auth = FirebaseAuth.instance;
 
   bool loading = false;
   @override
@@ -29,14 +31,17 @@ class _SignUpState extends State<SignUp> {
     setState(() {
       loading = true;
     });
-    _store.doc(emailcontroller.text).set({
-      'Email': emailcontroller.text,
-      'Password': passowordcontroller.text
-    }).then((value) {
+    _auth
+        .createUserWithEmailAndPassword(
+            email: emailcontroller.text, password: passowordcontroller.text)
+        .then((value) {
       setState(() {
         loading = false;
       });
-      Utils().Toastmessage("Vendor data Stored");
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => UserData()),
+          (route) => false);
       emailcontroller.text = "";
       passowordcontroller.text = "";
     }).onError((error, stackTrace) {
@@ -47,12 +52,12 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.sizeOf(context).height;
-
+    double width = MediaQuery.sizeOf(context).width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Sign up",
           style: TextStyle(color: Colors.white),
         ),
@@ -129,6 +134,28 @@ class _SignUpState extends State<SignUp> {
               SizedBox(
                 height: height * 0.02,
               ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: width * 0.12,
+                  ),
+                  const Text(
+                    "Already have account ",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginPage()));
+                      },
+                      child: const Text(
+                        "login",
+                        style: TextStyle(fontSize: 20),
+                      )),
+                ],
+              )
             ],
           ),
         ),

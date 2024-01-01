@@ -1,5 +1,8 @@
+import 'package:auxam/firebase_services/authmanger.dart';
 import 'package:auxam/utils/utlities.dart';
-import 'package:auxam/view/home_page.dart';
+import 'package:auxam/student/home_page.dart';
+import 'package:auxam/auth/sign_up.dart';
+import 'package:auxam/view/user_data.dart';
 import 'package:auxam/widgets/round_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -38,10 +41,13 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         loading = false;
       });
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()),
-          (route) => false);
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: ((context) => UserData()),
+        ),
+      );
     }).onError((error, stackTrace) {
       setState(() {
         loading = false;
@@ -53,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.sizeOf(context).height;
-
+    double width = MediaQuery.sizeOf(context).width;
     return WillPopScope(
       onWillPop: () async {
         SystemNavigator.pop();
@@ -134,12 +140,37 @@ class _LoginPageState extends State<LoginPage> {
                   loading: loading,
                   ontab: () {
                     if (_form.currentState!.validate()) {
-                      login();
+                      setState(() {
+                        loading = true;
+                      });
+                      AuthManager().login(emailcontroller.text,
+                          passowordcontroller.text, context);
                     } else {}
                   },
                 ),
                 SizedBox(
-                  height: height * 0.02,
+                  height: height * 0.1,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: width * 0.12,
+                    ),
+                    const Text(
+                      "Don't have account ",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => SignUp()));
+                      },
+                      child: const Text(
+                        "signup",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
