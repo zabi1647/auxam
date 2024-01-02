@@ -2,7 +2,6 @@ import 'package:auxam/utils/utlities.dart';
 import 'package:auxam/auth/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class StudentHomePage extends StatelessWidget {
   const StudentHomePage({super.key});

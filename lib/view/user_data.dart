@@ -104,14 +104,18 @@ class _UserDataState extends State<UserData> {
                   title: const Text('Student'),
                   groupValue: selectedrole,
                   onChanged: (value) {
-                    selectedrole = value!;
+                    setState(() {
+                      selectedrole = value!;
+                    });
                   }),
               RadioListTile(
                 value: "teacher",
                 title: const Text('Teacher'),
                 groupValue: selectedrole,
                 onChanged: (value) {
-                  selectedrole = value!;
+                  setState(() {
+                    selectedrole = value!;
+                  });
                 },
               ),
               SizedBox(
